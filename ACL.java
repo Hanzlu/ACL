@@ -48,7 +48,8 @@ public class ACL {
     int ptr = -1; //memory pointer
     int cells = 0; //cells in memory
     
-    String output = "";
+    String bOutput = ""; //binary output
+    String cOutput = ""; //character output
     char c; //code command
     
     Scanner input = new Scanner(System.in);
@@ -92,7 +93,7 @@ public class ACL {
           break;
 
         case '4':
-          output += memory.get(ptr);
+          bOutput += memory.get(ptr);
           break;
           
         //if-else-endif  
@@ -159,19 +160,23 @@ public class ACL {
         
         //binary output
         case 'B':
-          System.out.println(output);
-          output = "";
+          System.out.println(bOutput);
+          bOutput = "";
           break;
        
         //integer and character output
         case 'C':
-          if (memory.get(ptr) == 1) {
-            System.out.println(toBin(output));
+          if (bOutput.equals("")) {
+            System.out.println(cOutput);
+            cOutput = "";
+          }
+          else if (memory.get(ptr) == 1) {
+            cOutput += toBin(bOutput);
           }
           else {
-            System.out.println((char) toBin(output));
+            cOutput += (char) toBin(bOutput);
           }
-          output = "";
+          bOutput = "";
           break;
           
         //declare function  
