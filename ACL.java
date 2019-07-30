@@ -52,6 +52,10 @@ public class ACL {
     char c; //code command
     
     Scanner input = new Scanner(System.in);
+    String f = ""; //for functions
+    
+    //temporary variables
+    String t;
     int x;
     
     while (i < l) {
@@ -100,12 +104,13 @@ public class ACL {
               if (code.charAt(i) == '5') {
                 x++;
               }
-              else if (code.charAt(i) == '7' || code.charAt(i) == 'E' || (x == 1 && code.charAt(i) == '6')) {
+              else if (code.charAt(i) == '7' || code.charAt(i) == '8' || (x == 1 && code.charAt(i) == '6')) {
                 x--;
               }
             }
           }
           break;
+        //else
         case '6':
           x = 1;
           while (x != 0) {
@@ -113,22 +118,31 @@ public class ACL {
             if (code.charAt(i) == '5') {
               x++;
             }
-            else if (code.charAt(i) == '7' || code.charAt(i) == 'E') {
+            else if (code.charAt(i) == '7' || code.charAt(i) == '8') {
               x--;
             }
           }
           break;
           
+        //loop  
         case '8':
-          memory.set(ptr,(byte) 0);
+          if (memory.get(ptr) == 1) {
+            x = 1;
+            i--;
+            while (x != 0) {
+              i--;
+              if (code.charAt(i) == '7' || code.charAt(i) == '8') {
+                x++;
+              }
+              else if (code.charAt(i) == '5') {
+                x--;
+              }
+            }
+          }
           break;
         
-        case '9':
-          memory.set(ptr,(byte) Math.round(Math.random()));
-          break;
-          
         //input
-        case 'A':
+        case '9':
           x = Integer.parseInt(input.nextLine());
           if (x != 0 && x != 1) {
             System.out.println(1111);
@@ -138,6 +152,10 @@ public class ACL {
             memory.set(ptr,(byte) x);
             break;
           }
+
+        case 'A':
+          memory.set(ptr,(byte) 0);
+          break;
         
         //binary output
         case 'B':
@@ -156,29 +174,27 @@ public class ACL {
           output = "";
           break;
           
-        //comment  
+        //declare function  
         case 'D':
           i++;
+          f = "";
           while (code.charAt(i) != 'D') {
+            f += code.charAt(i);
             i++;
           }
           break;
-          
-        //loop  
+        //enter function into code 
         case 'E':
-          if (memory.get(ptr) == 1) {
-            x = 1;
-            i--;
-            while (x != 0) {
-              i--;
-              if (code.charAt(i) == '7' || code.charAt(i) == 'E') {
-                x++;
-              }
-              else if (code.charAt(i) == '5') {
-                x--;
-              }
-            }
+          t = "";
+          for (x = 0; x < i+1; x++) {
+            t += code.charAt(x);
           }
+          t += f;
+          for (x = i+1; x < l; x++) {
+            t += code.charAt(x);
+          }
+          code = t;
+          l = code.length();
           break;
           
         case 'F':
@@ -187,8 +203,7 @@ public class ACL {
       }
      
       i++;
-    }
-    
+    }  
   input.close();
   }
 }
