@@ -142,8 +142,11 @@ public class ACL {
           }
           break;
         
-        //input
         case '9':
+          memory.set(ptr, (byte) Math.round(Math.random()));
+
+        //input
+        case 'A':
           x = Integer.parseInt(input.nextLine());
           if (x != 0 && x != 1) {
             System.out.println(1111);
@@ -153,10 +156,6 @@ public class ACL {
             memory.set(ptr,(byte) x);
             break;
           }
-
-        case 'A':
-          memory.set(ptr,(byte) 0);
-          break;
         
         //binary output
         case 'B':
