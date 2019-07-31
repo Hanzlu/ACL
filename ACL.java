@@ -51,8 +51,9 @@ public class ACL {
     int i = 0; //code reader pointer; 
     
     ArrayList<Byte> memory = new ArrayList<Byte>(); //cell based, binary
-    int ptr = -1; //memory pointer
-    int cells = 0; //cells in memory
+    memory.add((byte) 0); //make the memory have one cell at start
+    int ptr = 0; //memory pointer
+    int cells = 1; //cells in memory
     
     String bOutput = ""; //binary output
     String cOutput = ""; //character output
