@@ -1,4 +1,4 @@
-//Advanced Computer Language v1.0 interpreter
+//Advanced Computer Language interpreter
 
 import java.util.Scanner;
 import java.io.File;
@@ -105,7 +105,7 @@ public class ACL {
               if (code.charAt(i) == '5') {
                 x++;
               }
-              else if (code.charAt(i) == '7' || code.charAt(i) == '8' || (x == 1 && code.charAt(i) == '6')) {
+              else if (code.charAt(i) == '7' || (x == 1 && code.charAt(i) == '6')) {
                 x--;
               }
             }
@@ -119,7 +119,7 @@ public class ACL {
             if (code.charAt(i) == '5') {
               x++;
             }
-            else if (code.charAt(i) == '7' || code.charAt(i) == '8') {
+            else if (code.charAt(i) == '7') {
               x--;
             }
           }
@@ -132,7 +132,7 @@ public class ACL {
             i--;
             while (x != 0) {
               i--;
-              if (code.charAt(i) == '7' || code.charAt(i) == '8') {
+              if (code.charAt(i) == '7') {
                 x++;
               }
               else if (code.charAt(i) == '5') {
