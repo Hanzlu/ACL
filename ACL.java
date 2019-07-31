@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 public class ACL {
   
+  //reads source file and returns the code
   static String getCode() {
     try {
       Scanner getName = new Scanner(System.in);
@@ -25,21 +26,26 @@ public class ACL {
       return "F";
     }
   }
-  
-  static int toBin(String dec) {
-    int l = dec.length();
+ 
+  //binary to decimal
+  static int toDec(String bin) {
+    int l = bin.length();
     int j = l-1;
     int x = 0;
-    int bin = 0;
+    int dec = 0;
     while (x < l) {
-      bin += Math.pow(2, x) * ((int) dec.charAt(j) - 48);
+      dec += Math.pow(2, x) * ((int) bin.charAt(j) - 48);
       x++; j--;
     }
-    return bin;
+    return dec;
   }
+  
+  //--------------------------------------------------------------
   
   public static void main(String[] args) {
   
+    //declares necessary variables etc.
+    
     String code = getCode();
     int l = code.length();
     int i = 0; //code reader pointer; 
@@ -59,9 +65,46 @@ public class ACL {
     String t;
     int x;
     
+    //------------------------------------------------------------------------
+    
+    //inserts function code when function call
+    //pre-execution
     while (i < l) {
       c = code.charAt(i);
-      
+      switch (c) {
+        //declare function  
+        case 'D':
+          i++;
+          f = "";
+          while (code.charAt(i) != 'D') {
+            f += code.charAt(i);
+            i++;
+          }
+          break;
+        //enter function into code 
+        case 'E':
+          t = "";
+          for (x = 0; x < i+1; x++) {
+            t += code.charAt(x);
+          }
+          t += f;
+          for (x = i+1; x < l; x++) {
+            t += code.charAt(x);
+          }
+          code = t;
+          l = code.length();
+          break;
+      }
+      i++;
+    }
+    i = 0;
+    
+    //--------------------------------------------------------------
+    
+    //reads and executes the code
+    while (i < l) {
+      c = code.charAt(i);
+
       switch (c) {
         
         //pointer movement
@@ -125,6 +168,10 @@ public class ACL {
           }
           break;
           
+        case '7':
+          //endif command, does nothing on its own
+          break;
+          
         //loop  
         case '8':
           if (memory.get(ptr) == 1) {
@@ -170,35 +217,18 @@ public class ACL {
             cOutput = "";
           }
           else if (memory.get(ptr) == 1) {
-            cOutput += toBin(bOutput);
+            cOutput += toDec(bOutput);
           }
           else {
-            cOutput += (char) toBin(bOutput);
+            cOutput += (char) toDec(bOutput);
           }
           bOutput = "";
           break;
           
-        //declare function  
         case 'D':
-          i++;
-          f = "";
-          while (code.charAt(i) != 'D') {
-            f += code.charAt(i);
-            i++;
-          }
           break;
-        //enter function into code 
         case 'E':
-          t = "";
-          for (x = 0; x < i+1; x++) {
-            t += code.charAt(x);
-          }
-          t += f;
-          for (x = i+1; x < l; x++) {
-            t += code.charAt(x);
-          }
-          code = t;
-          l = code.length();
+          //D and E are handled pre-execution
           break;
           
         case 'F':
