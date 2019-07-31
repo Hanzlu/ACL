@@ -192,6 +192,7 @@ public class ACL {
         
         case '9':
           memory.set(ptr, (byte) Math.round(Math.random()));
+          break;
 
         //input
         case 'A':
@@ -199,6 +200,7 @@ public class ACL {
           if (x != 0 && x != 1) {
             System.out.println(1111);
             i = l;
+            break;
           }
           else {
             memory.set(ptr,(byte) x);
