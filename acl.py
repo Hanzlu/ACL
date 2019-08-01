@@ -1,3 +1,4 @@
+#Credit to JonoCode9374
 #Advanced Computer Language --> Python port
 
 import random
