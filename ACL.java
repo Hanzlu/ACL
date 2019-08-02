@@ -17,7 +17,10 @@ public class ACL {
     
       File file = new File(fileName);
       Scanner fRead = new Scanner(file);
-      String code = fRead.nextLine();
+      String code = "";
+      while (fRead.hasNextLine()) {
+        code += fRead.nextLine();
+      }
       fRead.close();
     
       return code;
