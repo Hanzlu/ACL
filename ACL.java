@@ -69,40 +69,6 @@ public class ACL {
     String t;
     int x;
     
-    //------------------------------------------------------------------------
-    
-    //inserts function code when function call
-    //pre-execution
-    while (i < l) {
-      c = code.charAt(i);
-      switch (c) {
-        //declare function  
-        case 'D':
-          i++;
-          f = "";
-          while (code.charAt(i) != 'D') {
-            f += code.charAt(i);
-            i++;
-          }
-          break;
-        //enter function into code 
-        case 'E':
-          t = "";
-          for (x = 0; x < i+1; x++) {
-            t += code.charAt(x);
-          }
-          t += f;
-          for (x = i+1; x < l; x++) {
-            t += code.charAt(x);
-          }
-          code = t;
-          l = code.length();
-          break;
-      }
-      i++;
-    }
-    i = 0;
-    
     //--------------------------------------------------------------
     
     //reads and executes the code
@@ -166,7 +132,7 @@ public class ACL {
             if (code.charAt(i) == '5') {
               x++;
             }
-            else if (code.charAt(i) == '7') {
+            else if (code.charAt(i) == '7') {          
               x--;
             }
           }
@@ -230,18 +196,34 @@ public class ACL {
           }
           bOutput = "";
           break;
-          
+        
+        //declare function
         case 'D':
+          i++;
+          f = "";
+          while (code.charAt(i) != 'D') {
+            f += code.charAt(i);
+            i++;
+          }
           break;
+        //enter function into code 
         case 'E':
-          //D and E are handled pre-execution
+          t = "";
+          for (x = 0; x < i+1; x++) {
+            t += code.charAt(x);
+          }
+          t += f;
+          for (x = i+1; x < l; x++) {
+            t += code.charAt(x);
+          }
+          code = t;
+          l = code.length();
           break;
           
         case 'F':
           System.out.println(1111);
           i = l;
       }
-     
       i++;
     }  
   input.close();
