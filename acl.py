@@ -55,36 +55,6 @@ class ACL:
 
         #--------------------
 
-        #inserts function code when function call
-        #pre-execution
-        while i < l:
-            c = code[i]
-            #declare function
-            if c == "D":
-                i += 1
-                f = ""
-                while code[i] != "D":
-                    f += code[i]
-                    i += 1
-            #enter function into code
-            elif c == "E":
-                t = ""
-                for x in range(0, i + 1):
-                    t += code[x]
-                t += f
-
-                for x in range(i + 1, l):
-                    t += code[x]
-
-                code = t
-                l = len(code)
-
-            i += 1
-
-        i = 0
-
-        #--------------------
-
         while i < l:
             c = code[i]
 
@@ -182,12 +152,25 @@ class ACL:
 
                 bOutput = ""
 
+            #declare function
             elif c == "D":
-                pass
-
+                i += 1
+                f = ""
+                while code[i] != "D":
+                    f += code[i]
+                    i += 1
+            #enter function into code
             elif c == "E":
-                #D and E are handled pre-execution
-                pass
+                t = ""
+                for x in range(0, i + 1):
+                    t += code[x]
+                t += f
+
+                for x in range(i + 1, l):
+                    t += code[x]
+
+                code = t
+                l = len(code)
 
             elif c == "F":
                 print(1111)
