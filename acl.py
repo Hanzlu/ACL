@@ -92,7 +92,7 @@ class ACL:
                         i += 1
                         if code[i] == '5':
                             x += 1
-                        elif code[i] == "7" or (x == 1 and code[i] == "6"):
+                        elif code[i] == "7" or code[i] == "8" (x == 1 and code[i] == "6"):
                             x -= 1
 
             #else
@@ -102,7 +102,7 @@ class ACL:
                     i += 1
                     if code[i] == "5":
                         x += 1
-                    elif code[i] == "7":
+                    elif code[i] == "7" or code[i] == "8":
                         x -= 1
 
             elif c == "7":
@@ -117,7 +117,7 @@ class ACL:
                     while x != 0:
                         i -= 1
                         
-                        if code[i] == "7":
+                        if code[i] == "7" or code[i] == "8":
                             x += 1
                         elif code[i] == "5":
                             x -= 1
