@@ -74,7 +74,7 @@ public class ACL {
     //reads and executes the code
     while (i < l) {
       c = code.charAt(i);
-
+      
       switch (c) {
         
         //pointer movement
@@ -118,7 +118,7 @@ public class ACL {
               if (code.charAt(i) == '5') {
                 x++;
               }
-              else if (code.charAt(i) == '7' || (x == 1 && code.charAt(i) == '6')) {
+              else if (code.charAt(i) == '7' || code.charAt(i) == '8' || (x == 1 && code.charAt(i) == '6')) {
                 x--;
               }
             }
@@ -132,7 +132,7 @@ public class ACL {
             if (code.charAt(i) == '5') {
               x++;
             }
-            else if (code.charAt(i) == '7') {          
+            else if (code.charAt(i) == '7' || code.charAt(i) == '8') {          
               x--;
             }
           }
@@ -146,10 +146,9 @@ public class ACL {
         case '8':
           if (memory.get(ptr) == 1) {
             x = 1;
-            i--;
             while (x != 0) {
               i--;
-              if (code.charAt(i) == '7') {
+              if (code.charAt(i) == '7' || code.charAt(i) == '8') {
                 x++;
               }
               else if (code.charAt(i) == '5') {
